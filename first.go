@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/rand"
 	"math/cmplx"
+	"time"
 )
 const Pi = 3.14
 var (
@@ -38,6 +39,26 @@ func needInt(x int) int { return x*10 + 1 }
 func needFloat(x float64) float64 {
 	return x * 0.1
 }
+func sqrt(x float64) string {
+	if x < 0 {
+		return sqrt(-x) + "i"
+	}
+	return fmt.Sprint(math.Sqrt(x))
+}
+func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim {
+		return v
+	}
+	return lim
+}
+
+
+
+
+
+
+
+
 
 
 func main() {
@@ -106,6 +127,53 @@ func main() {
 		sum += i
 	}
 	fmt.Println(sum)
+//he init and post statements are optional.
+	tot := 1
+	for ; tot< 1000; {
+		tot += tot
+	}
+	fmt.Println(tot)
+	// IF
+	fmt.Println(sqrt(2), sqrt(-4))
+	fmt.Println(
+		pow(3, 2, 10),
+		pow(3, 3, 20),
+	)
+	//switch case
+	fmt.Println("When's Saturday?")
+	today := time.Now().Weekday()
+	switch time.Saturday {
+	case today + 0:
+		fmt.Println("Today.")
+	case today + 1:
+		fmt.Println("Tomorrow.")
+	case today + 2:
+		fmt.Println("In two days.")
+	default:
+		fmt.Println("Too far away.")
+	}
+	//switch with no condition
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon.")
+	default:
+		fmt.Println("Good evening.")
+	}
+//defer
+	defer fmt.Println("world")
+
+	fmt.Println("hello")
+
+	fmt.Println("counting")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
 }
 
 
