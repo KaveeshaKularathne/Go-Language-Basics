@@ -17,8 +17,13 @@ var (
 )
 
 func printSlice(d []int) {
+
 	fmt.Printf("len=%d cap=%d %v\n", len(d), cap(d), d)
 }
+
+var power = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+
 func main()  {
 //pointers
 	i, j := 42, 2701
@@ -117,4 +122,18 @@ func main()  {
 	for i := 0; i < len(board); i++ {
 		fmt.Printf("%s\n", strings.Join(board[i], " "))
 	}
+
+	for i, v := range power {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+
+	pow := make([]int, 10)
+	for i := range pow {
+		pow[i] = 1 << uint(i) // == 2**i
+	}
+	for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+
+
 }
