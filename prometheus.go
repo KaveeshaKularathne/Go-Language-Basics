@@ -28,5 +28,19 @@ func main() {
 		StackSize: 1 << 10, // 1 KB
 		LogLevel:  log.ERROR,
 	}))
+	e.Use(middleware.RequestIDWithConfig(middleware.RequestIDConfig{
+		Generator: func() string {
+			return customGenerator()
+		},
+	}))
+
+
+	e.Pre(middleware.Rewrite(map[string]string{
+		"/old":              "/new",
+		"/api/*":            "/$1",
+		"/js/*":             "/public/javascripts/$1",
+		"/users/*/orders/*": "/user/$1/order/$2",
+	}))
+	e.Pre(middleware.RecoverWithConfig(middleware.RewriteConfig{}))
 }
 
